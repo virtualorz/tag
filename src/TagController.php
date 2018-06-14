@@ -12,7 +12,7 @@ use Config;
 
 class Tag
 {
-    public function list($page = 0) {
+    public function list($page = 0,$is_backend = 0) {
 
         $page_display = intval(Request::input('page_display', 10));
         if (!in_array($page_display, Config::get('pagination.data_display', []))) {
@@ -27,6 +27,16 @@ class Tag
                 'tag.enable'
             ])
             ->whereNull('tag.delete');
+        
+        if($is_backend == 0)
+        {
+            $qb->where('enable',1);
+        }
+        if(Request::input('keyword', '') != '')
+        {
+            $qb->where('name','like','%'.Request::input('keyword', '').'%');
+        }
+
         if($page !== 0)
         {
             $qb->offset(($page - 1) * $page_display)

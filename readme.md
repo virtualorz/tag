@@ -26,13 +26,16 @@ composer require virtualorz/tag
 <pre><code>
 php artisan migrate
 </code></pre>
-
 # usage #
 #### 1. get cate list data ####
 <pre><code>
-$dataSet = Tag::list();
+$dataSet = Tag::list($page=0,$is_backend=0);
 </code></pre>
-$dataSet : return date
+$page : page for data display,
+
+＄is_backend : if 0 then display disabled data, if 1 then display enable data only
+$dataSet : return date  
+$_GET['keyword'] : search for name keyword
 
 #### 2. add data to cate ####
 <pre><code>
