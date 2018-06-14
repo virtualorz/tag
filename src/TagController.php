@@ -129,7 +129,7 @@ class Tag
 
         foreach (Request::input('tag-lang', []) as $k => $v) {
             $validator = Validator::make($v, [
-                'tag-name' => 'string|required|max;12',
+                'tag-name' => 'string|required|max:12',
             ]);
             if ($validator->fails()) {
                 throw new ValidateException($validator->errors());
@@ -210,7 +210,7 @@ class Tag
             \Log::error($ex->getMessage());
         }
 
-        return $dataRow_faq;
+        return $dataRow_tag;
     }
 
     public function delete()
